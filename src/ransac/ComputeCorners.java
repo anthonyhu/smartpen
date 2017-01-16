@@ -31,26 +31,26 @@ public class ComputeCorners {
         
         // Ransac's algorithm to compute upper horizontal.
         ArrayList<Point> data_horizontal_1 = horizontal_thresholding(grayscale_image, 
-        		0, grayscale_image.getWidth(), 0, grayscale_image.getHeight()/8); //500
+        		0, grayscale_image.getWidth(), 0, grayscale_image.getHeight() / 8); //500
         Ransac ransac_horizontal_1 = new Ransac(fitting, data_horizontal_1, threshold);
         horizontal_1 = ransac_line(ransac_horizontal_1); 
         
         // Ransac's algorithm to compute lower horizontal.
         ArrayList<Point> data_horizontal_2 = horizontal_thresholding(grayscale_image, 
         		0, grayscale_image.getWidth(), 
-        		grayscale_image.getHeight()*7/8, grayscale_image.getHeight()); //1200 1600
+        		grayscale_image.getHeight() * 7 / 8, grayscale_image.getHeight()); //1200 1600
         Ransac ransac_horizontal_2 = new Ransac(fitting, data_horizontal_2, threshold);
         horizontal_2 = ransac_line(ransac_horizontal_2); 
         
         // Ransac's algorithm to compute left vertical.
         ArrayList<Point> data_vertical_1 = vertical_thresholding(grayscale_image, 
-        		0, grayscale_image.getWidth()/5, 0, grayscale_image.getHeight()); //600
+        		0, grayscale_image.getWidth() / 5, 0, grayscale_image.getHeight()); //600
         Ransac ransac_vertical_1 = new Ransac(fitting, data_vertical_1, threshold);
         vertical_1 = ransac_line(ransac_vertical_1); 
         
         // Ransac's algorithm to compute right vertical.
         ArrayList<Point> data_vertical_2 = vertical_thresholding(grayscale_image, 
-        		grayscale_image.getWidth()*4/5, grayscale_image.getWidth(), 
+        		grayscale_image.getWidth() * 4 / 5, grayscale_image.getWidth(), 
         		0, grayscale_image.getHeight()); //2000 2500
         Ransac ransac_vertical_2 = new Ransac(fitting, data_vertical_2, threshold);
         vertical_2 = ransac_line(ransac_vertical_2); 
@@ -58,10 +58,10 @@ public class ComputeCorners {
         
         ArrayList<Point> corners = new ArrayList<Point>(4);
         
-        corners.add(intersection(vertical_1,horizontal_1));
-        corners.add(intersection(vertical_1,horizontal_2));
-        corners.add(intersection(vertical_2,horizontal_1));
-        corners.add(intersection(vertical_2,horizontal_2));
+        corners.add(intersection(vertical_1, horizontal_1));
+        corners.add(intersection(vertical_1, horizontal_2));
+        corners.add(intersection(vertical_2, horizontal_1));
+        corners.add(intersection(vertical_2, horizontal_2));
  
         return corners;
  
@@ -82,11 +82,11 @@ public class ComputeCorners {
         for(int i=x_min; i<x_max; i++) {
             for(int j=y_min; j<y_max-1; j++) {
  
-            	upper_pixel = new Color(grayscale_image.getRGB(i,j)).getRed();
-            	lower_pixel = new Color(grayscale_image.getRGB(i,j+1)).getRed();
+            	upper_pixel = new Color(grayscale_image.getRGB(i, j)).getRed();
+            	lower_pixel = new Color(grayscale_image.getRGB(i, j+1)).getRed();
                 
                 if (Math.abs(upper_pixel - lower_pixel) > threshold) {
-                	data.add(new Point(i,j));
+                	data.add(new Point(i, j));
                 }
             }
         }
@@ -109,11 +109,11 @@ public class ComputeCorners {
  
         for(int i=x_min; i<x_max-1; i++) {
             for(int j=y_min; j<y_max; j++) {                    
-            	left_pixel = new Color(grayscale_image.getRGB(i+1,j)).getRed();
-            	right_pixel = new Color(grayscale_image.getRGB(i,j)).getRed();
+            	left_pixel = new Color(grayscale_image.getRGB(i+1, j)).getRed();
+            	right_pixel = new Color(grayscale_image.getRGB(i, j)).getRed();
             	
             	if (Math.abs(left_pixel - right_pixel) > threshold) {
-                	data.add(new Point(i,j));
+                	data.add(new Point(i, j));
                 }
             }
         }
@@ -136,24 +136,24 @@ public class ComputeCorners {
           double y = line.get_Y(0);
           Point p1 = new Point(0, (int)(y));
           Point p2 = new Point(original_image.getWidth(), (int)(y));
-          result = new Line(p1,p2);
+          result = new Line(p1, p2);
         }
         else if (line.is_vertical()) {
           double x = line.get_X(0);
           Point p1 = new Point((int)(x), 0);
           Point p2 = new Point((int)(x), original_image.getHeight());
-          result = new Line(p1,p2);
+          result = new Line(p1, p2);
         }
         else {
         	int x1 = (int)(line.get_X(0));
             int y1 = (int)(line.get_Y(x1));
-            Point p1 = new Point(x1,y1);
+            Point p1 = new Point(x1, y1);
             
             int x2 = (int)(line.get_X(original_image.getHeight()));
             int y2 = (int)(line.get_Y(x2));
-            Point p2 = new Point(x2,y2);
+            Point p2 = new Point(x2, y2);
             
-            result = new Line(p1,p2);
+            result = new Line(p1, p2);
         }
         
         return result;
@@ -170,24 +170,24 @@ public class ComputeCorners {
         double x4 = line2.get_X(original_image.getHeight());
         double y4 = line2.get_Y(x2);
         
-        if (!lines_intersect(x1,y1,x2,y2,x3,y3,x4,y4)) return null;
+        if (!lines_intersect(x1, y1, x2, y2, x3, y3, x4, y4)) return null;
           double px = x1,
                  py = y1,
-                 rx = x2-px,
-                 ry = y2-py;
+                 rx = x2 - px,
+                 ry = y2 - py;
           double qx = x3,
                  qy = y3,
-                 sx = x4-qx,
-                 sy = y4-qy;
+                 sx = x4 - qx,
+                 sy = y4 - qy;
 
-          double det = sx*ry - sy*rx;
+          double det = sx * ry - sy * rx;
           if (det == 0) {
             return null;
           }
           else {
-            double z = (sx * (qy-py) + sy * (px-qx)) / det;
+            double z = (sx * (qy - py) + sy * (px - qx)) / det;
             if (z==0 ||  z==1) return null;  // Intersection at the end of the two lines.
-            return new Point((int)(px + z*rx), (int)(py + z*ry));
+            return new Point((int)(px + z * rx), (int)(py + z * ry));
           }
      }
     

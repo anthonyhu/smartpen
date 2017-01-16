@@ -28,7 +28,7 @@ public class Homography_Application{
 		/* The new image is blank at first, we then loop through each pixel and apply
 		 * the function phi^(-1) and copy the corresponding pixel.
 		 */
-	    BufferedImage new_image = new BufferedImage(p8.x,p8.y, original_image.getType());
+	    BufferedImage new_image = new BufferedImage(p8.x, p8.y, original_image.getType());
 	    
 	    // u and v correspond to the coordinates in the original image.
 	    int u, v;
@@ -36,7 +36,7 @@ public class Homography_Application{
 	    
 		for (int i=0; i<new_image.getWidth(); i++) {
 	            for (int j=0; j<new_image.getHeight(); j++) {
-	            	double[] p = Homography_Coefficients.inverse_phi(new Point(i,j), H);
+	            	double[] p = Homography_Coefficients.inverse_phi(new Point(i, j), H);
 	            	 
 	            	// Retrieving each pixel with the floor method.
 	            	u = (int)(p[0] + 0.5);
@@ -46,10 +46,10 @@ public class Homography_Application{
 	            	if ((u > 0) && (u < original_image.getWidth()) && 
 	            			(v > 0) && (v < original_image.getHeight())) {
 
-	            		red = new Color(original_image.getRGB(u,v)).getRed();
-	            		green = new Color(original_image.getRGB(u,v)).getGreen();
-	            		blue = new Color(original_image.getRGB(u,v)).getBlue();
-	            		alpha = new Color(original_image.getRGB(u,v)).getAlpha();
+	            		red = new Color(original_image.getRGB(u, v)).getRed();
+	            		green = new Color(original_image.getRGB(u, v)).getGreen();
+	            		blue = new Color(original_image.getRGB(u, v)).getBlue();
+	            		alpha = new Color(original_image.getRGB(u, v)).getAlpha();
 
 	            		new_pixel = color_pixel(alpha, red, green, blue);
 	            		new_image.setRGB(i, j, new_pixel);

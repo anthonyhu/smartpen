@@ -116,7 +116,7 @@ public class Matrix {
     	Matrix N = new Matrix(matrix.get_n_rows(), matrix.get_n_cols());
     	
         M = transpose(cofactor_matrix(matrix));
-        N = Matrix.multiply_by_constant(M, 1.0/d);
+        N = Matrix.multiply_by_constant(M, 1.0 / d);
         return N;
     }
 	

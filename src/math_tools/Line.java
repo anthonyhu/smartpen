@@ -37,10 +37,10 @@ public class Line
     if (is_vertical()) {
       return b;
     }
-    return (y-b) / a;
+    return (y - b) / a;
   }
   public double get_Y(double x) {
-    return a*x + b;
+    return a * x + b;
   }
   
   public boolean is_horizontal() {

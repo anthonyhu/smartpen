@@ -11,7 +11,7 @@ public class Homography_Coefficients {
 			Point y0, Point y1, Point y2, Point y3) throws ArithmeticException {
 		
 		// M is the homography matrix.
-		Matrix M = new Matrix(8,8);
+		Matrix M = new Matrix(8, 8);
 
 		for (int i=0; i<4; i++) {
 			M.set_value_at(i, 2, 1);
@@ -60,7 +60,7 @@ public class Homography_Coefficients {
 		
 		
 		// X is the column vector containing the coordinates of the arrival corners.
-		Matrix X = new Matrix(8,1);
+		Matrix X = new Matrix(8, 1);
 
 		X.set_value_at(0, 0, y0.getX());
 		X.set_value_at(4, 0, y0.getY());
@@ -71,7 +71,7 @@ public class Homography_Coefficients {
 		X.set_value_at(3, 0, y3.getX());
 		X.set_value_at(7, 0, y3.getY());
 		
-		Matrix H = new Matrix(8,1);
+		Matrix H = new Matrix(8, 1);
 		H = Matrix.multiply(Matrix.inverse(M), X);
 			
 	    return H;
@@ -83,25 +83,25 @@ public class Homography_Coefficients {
 		double c, x, y ;
 		
 		// c is a normalising factor
-		c = ((H.get_value_at(0,0) * H.get_value_at(7,0) * p.getY()) 
-				- (H.get_value_at(3,0) * H.get_value_at(7,0) * p.getX()) 
-				+ (H.get_value_at(6,0) * H.get_value_at(4,0) * p.getX())
-				- (H.get_value_at(1,0) * H.get_value_at(6,0) * p.getY()) 
-				- (H.get_value_at(0,0) * H.get_value_at(4,0)) 
-				+ (H.get_value_at(1,0) * H.get_value_at(3,0)));
-		x = ((H.get_value_at(1,0) * p.getY()) 
-				- (H.get_value_at(2,0) * H.get_value_at(7,0) * p.getY())
-				+ (H.get_value_at(5,0) * H.get_value_at(7,0) * p.getX()) 
-				- (H.get_value_at(4,0) * p.getX()) 
-				+ (H.get_value_at(4,0) * H.get_value_at(2,0)) 
-				- (H.get_value_at(5,0) * H.get_value_at(1,0))) 
+		c = ((H.get_value_at(0, 0) * H.get_value_at(7, 0) * p.getY()) 
+				- (H.get_value_at(3, 0) * H.get_value_at(7, 0) * p.getX()) 
+				+ (H.get_value_at(6, 0) * H.get_value_at(4, 0) * p.getX())
+				- (H.get_value_at(1, 0) * H.get_value_at(6, 0) * p.getY()) 
+				- (H.get_value_at(0, 0) * H.get_value_at(4, 0)) 
+				+ (H.get_value_at(1, 0) * H.get_value_at(3, 0)));
+		x = ((H.get_value_at(1, 0) * p.getY()) 
+				- (H.get_value_at(2, 0) * H.get_value_at(7, 0) * p.getY())
+				+ (H.get_value_at(5, 0) * H.get_value_at(7, 0) * p.getX()) 
+				- (H.get_value_at(4, 0) * p.getX()) 
+				+ (H.get_value_at(4, 0) * H.get_value_at(2, 0)) 
+				- (H.get_value_at(5, 0) * H.get_value_at(1, 0))) 
 				/ c;
-		y = ((H.get_value_at(3,0) * p.getX()) 
-				- (H.get_value_at(6,0) * H.get_value_at(5,0) * p.getX())
-				+ (H.get_value_at(2,0) * H.get_value_at(6,0) * p.getY()) 
-				- (H.get_value_at(0,0) * p.getY()) 
-				+ (H.get_value_at(0,0) * H.get_value_at(5,0))
-				- (H.get_value_at(3,0) * H.get_value_at(2,0))) 
+		y = ((H.get_value_at(3, 0) * p.getX()) 
+				- (H.get_value_at(6, 0) * H.get_value_at(5, 0) * p.getX())
+				+ (H.get_value_at(2, 0) * H.get_value_at(6, 0) * p.getY()) 
+				- (H.get_value_at(0, 0) * p.getY()) 
+				+ (H.get_value_at(0, 0) * H.get_value_at(5, 0))
+				- (H.get_value_at(3, 0) * H.get_value_at(2, 0))) 
 				/ c;
 		
 		double[] L = new double[2];

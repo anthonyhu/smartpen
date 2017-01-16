@@ -25,7 +25,7 @@ public class Grayscale {
                 alpha = rgba_value.getAlpha();
                 
                 // Use luminance to obtain the gray level.
-                int gray = (int) (0.21*red + 0.71*green + 0.07*blue);
+                int gray = (int) (0.21 * red + 0.71 * green + 0.07 * blue);
                 new_pixel = color_pixel(alpha, gray, gray, gray);
  
                 // Create the new pixel.

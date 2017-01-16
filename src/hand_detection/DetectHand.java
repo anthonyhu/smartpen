@@ -43,7 +43,7 @@ public class DetectHand {
 		}
 		
 		// Normalise the difference
-		total_difference /= (3*Math.pow(256, 3));
+		total_difference /= (3 * Math.pow(256, 3));
 
 		if (total_difference>threshold)
 			return true;    // The hand is no longer here.

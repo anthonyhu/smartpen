@@ -9,7 +9,7 @@ public class Ransac {
 	  // Array of points to construct the model.
 	  private ArrayList<Point> data;
 	  // Current line of the model.
-	  private Line current_line = new Line(0,1);
+	  private Line current_line = new Line(0, 1);
 	  // Maximum number of iterations
 	  private int max_nb_iterations;
 	  // Threshold to accept a point in the model (inlier).
@@ -27,7 +27,7 @@ public class Ransac {
 	  private double current_score;
 
 	  // Line representing the best model.
-	  private Line best_line = new Line(0,0);
+	  private Line best_line = new Line(0, 0);
 	  // Array of inliers of the best model.
 	  private ArrayList<Point> inliers_of_best_model = new ArrayList<Point>();
 	  // Score of the best model.
@@ -68,7 +68,7 @@ public class Ransac {
       
       for (int i=0; i<nb_points; ) { 
     	// Random number between 0 and data size - 1.
-        int t = (int) (Math.random()*(data.size()-1));
+        int t = (int) (Math.random()*(data.size() - 1));
         Point pt = data.get(t);
         
         if (!points.contains(pt)) { // If the point has not been chosen yet.
